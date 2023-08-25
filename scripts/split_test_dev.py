@@ -36,6 +36,7 @@ def get_book_speaker_duration(manifests: List[Path], output_dir: Path):
     speaker_duration = {}
     book_speaker_duration = {}
     for file in manifests:
+        logging.info(f"Processing {file}.")
         with gzip.open(file, "r") as fin:
             for line in fin:
                 line = json.loads(line)
@@ -53,10 +54,11 @@ def get_book_speaker_duration(manifests: List[Path], output_dir: Path):
                 else:
                     book_duration[book] = duration
 
-                if (speaker, book) in book_speaker_duration:
-                    book_speaker_duration[(speaker, book)] += duration
+                key = str((speaker, book))
+                if key in book_speaker_duration:
+                    book_speaker_duration[key] += duration
                 else:
-                    book_speaker_duration[(speaker, book)] = duration
+                    book_speaker_duration[key] = duration
     in_dir = manifests[0].parent
     with open(in_dir / "speaker.dur", "w") as f:
         json.dump(speaker_duration, f, indent=4)
@@ -73,7 +75,11 @@ def select_books_speakers(manifests: List[Path], output_dir: Path):
         or not (in_dir / "book.dur").exists()
         or not (in_dir / "book_speaker.dur").exists()
     ):
+        logging.info(f"Calculating book & speaker duration, it will take around 10 minutes.")
         get_book_speaker_duration(manifests, output_dir)
+    else:
+        logging.info(f"Loading existing speaker.dur, boo.dur, book_speaker.dur.")
+
     with open(in_dir / "speaker.dur", "r") as f:
         speaker_duration = json.load(f)
     with open(in_dir / "book.dur", "r") as f:
@@ -85,6 +91,7 @@ def select_books_speakers(manifests: List[Path], output_dir: Path):
     selected_speakers = set()
     selected_duration = 0.0
     for sb, d in book_speaker_duration.items():
+        sb = eval(sb)
         s_duration = speaker_duration[sb[0]]
         b_duration = book_duration[sb[1]]
         s_rate = d / s_duration
@@ -116,6 +123,8 @@ def split_test_set(manifests: List[Path], output_dir: Path):
         or not (output_dir / "selected_books.txt").exists()
     ):
         select_books_speakers(manifests, output_dir)
+    else:
+        logging.info(f"Loading existing selected_speakers.txt selected_books.txt.")
     selected_speakers = set()
     with open(output_dir / "selected_speakers.txt", "r") as f:
         for line in f:
@@ -125,21 +134,18 @@ def split_test_set(manifests: List[Path], output_dir: Path):
         for line in f:
             selected_books.add(line.strip())
 
-    tfile = gzip.open(output_dir / "libriheavy_test_raw.jsonl.gz", "w")
-
-    for m in manifests:
-        with gzip.open(output_dir / m.name, "w") as f:
-            with gzip.open(m, "r") as fin:
-                for line in fin:
+    with gzip.open(output_dir / "libriheavy_cuts_test_raw.jsonl.gz", "w") as tf:
+        for m in manifests:
+            logging.info(f"Splitting {m}.")
+            with gzip.open(output_dir / m.name, "w") as f, gzip.open(m, "r") as fin:
+                for lines in fin:
                     line = json.loads(lines)
                     speaker = line["id"].split("/")[1]
                     book = line["custom"]["text_path"].split("/")[-2]
                     if book in selected_books or speaker in selected_speakers:
-                        tfile.write(lines)
+                        tf.write(lines)
                     else:
                         f.write(lines)
-    tfile.close()
-
 
 def main():
     args = get_args()

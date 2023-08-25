@@ -25,10 +25,10 @@ def get_args():
     )
 
     parser.add_argument(
-        "--wer-threthod",
+        "--cer-threthod",
         type=float,
-        default=0.15,
-        help="""Through the cuts that have wer greater than this value""",
+        default=0.10,
+        help="""Through the cuts that have cer greater than this value""",
     )
     parser.add_argument(
         "--hours",
@@ -72,7 +72,7 @@ def get_speaker_wers(raw_manifest: str) -> Dict[str, float]:
 
 def split_subset(
     raw_manifest,
-    wer_threthod: float,
+    cer_threthod: float,
     hours: int,
     speaker_wers: List[Tuple[str, float]],
     output_dir: Path,
@@ -88,11 +88,15 @@ def split_subset(
             speaker = cut["id"].split("/")[1]
             texts = cut["supervisions"][0]["custom"]["texts"]
             duration = math.floor(1000 * cut["duration"]) / 1000
-            ref = normalize(texts[0]).split()
-            hyp = texts[1].split()
+            ref = normalize(texts[0]).strip()
+            hyp = texts[1].strip()
+            distance = editdistance.eval(ref, hyp)
+            cer = distance / len(ref)
+            ref = ref.split()
+            hyp = hyp.split()
             distance = editdistance.eval(ref, hyp)
             wer = distance / len(ref)
-            if wer >= wer_threthod:
+            if cer >= cer_threthod:
                 continue
             else:
                 if speaker in clean_speakers:
@@ -108,11 +112,11 @@ def split_subset(
     clean_prob = hours * 2 / clean_hours
     other_prob = hours * 2 / other_hours
 
-    clean_of = gzip.open(output_dir / "libriheavy_test_clean.jsonl.gz", "w")
-    clean_large_of = gzip.open(output_dir / "libriheavy_test_clean_large.jsonl.gz", "w")
-    other_of = gzip.open(output_dir / "libriheavy_test_other.jsonl.gz", "w")
-    other_large_of = gzip.open(output_dir / "libriheavy_test_other_large.jsonl.gz", "w")
-    dev_of = gzip.open(output_dir / "libriheavy_dev.jsonl.gz", "w")
+    clean_of = gzip.open(output_dir / "libriheavy_cuts_test_clean.jsonl.gz", "w")
+    clean_large_of = gzip.open(output_dir / "libriheavy_cuts_test_clean_large.jsonl.gz", "w")
+    other_of = gzip.open(output_dir / "libriheavy_cuts_test_other.jsonl.gz", "w")
+    other_large_of = gzip.open(output_dir / "libriheavy_cuts_test_other_large.jsonl.gz", "w")
+    dev_of = gzip.open(output_dir / "libriheavy_cuts_dev.jsonl.gz", "w")
 
     with gzip.open(raw_manifest, "r") as fin:
         for line in fin:
@@ -156,7 +160,7 @@ def main():
     speaker_wers = get_speaker_wers(raw_manifest)
     split_subset(
         raw_manifest,
-        wer_threthod=args.wer_threthod,
+        cer_threthod=args.cer_threthod,
         hours=args.hours,
         speaker_wers=speaker_wers,
         output_dir=args.output_dir,
