@@ -14,7 +14,7 @@ log() {
 
 
 if [ $stage -le 0 ] && [ $stop_stage -ge 0 ]; then
-  log "Stage 1: Downloading raw manifests from modelscope."
+  log "Stage 0: Downloading raw manifests from modelscope."
   if [ ! -e raw/libriheavy_cuts_small.jsonl.gz ]; then
     GIT_LFS_SKIP_SMUDGE=1 git clone https://www.modelscope.cn/datasets/pkufool/Libriheavy.git
     cd Libriheavy

@@ -28,7 +28,7 @@ fi
 
 
 if [ $stage -le 0 ] && [ $stop_stage -ge 0 ]; then
-  log "Stage 1: Downloading manifests from modelscope."
+  log "Stage 0: Downloading manifests from modelscope."
   if [ ! -e libriheavy_cuts_small.jsonl.gz ]; then
     GIT_LFS_SKIP_SMUDGE=1 git clone https://www.modelscope.cn/datasets/pkufool/Libriheavy.git
     cd Libriheavy
@@ -45,7 +45,7 @@ if [ $stage -le 1 ] && [ $stop_stage -ge 1 ]; then
   for subset in small medium large dev test_clean test_other test_clean_large test_other_large; do
     if [ ! -e libriheavy_cuts_${subset}.jsonl.gz ]; then
       log "Downloading ${subset} subset."
-      wget -P raw -c https://huggingface.co/datasets/pkufool/libriheavy/resolve/main/libriheavy_cuts_${subset}.jsonl.gz
+      wget -c https://huggingface.co/datasets/pkufool/libriheavy/resolve/main/libriheavy_cuts_${subset}.jsonl.gz
     else
       log "Skipping download, ${subset} subset exists."
     fi
@@ -55,7 +55,7 @@ fi
 
 if [ $stage -le 2 ] && [ $stop_stage -ge 2 ]; then
   for subset in small medium large test_clean test_other dev test_clean_large test_other_large; do
-    log "Stage 5: Extracting subset ${subset}"
+    log "Stage 2: Extracting subset ${subset}"
     python ./scripts/extract_and_normalize_transcript.py \
       --manifest libriheavy_cuts_${subset}.jsonl.gz \
       --subset ${subset} \
