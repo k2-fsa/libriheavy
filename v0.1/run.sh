@@ -8,7 +8,6 @@ stop_stage=5
 . ../scripts/parse_options.sh || exit 1
 
 log() {
-  # This function is from espnet
   local fname=${BASH_SOURCE[1]##*/}
   echo -e "$(date '+%Y-%m-%d %H:%M:%S') (${fname}:${BASH_LINENO[0]}:${FUNCNAME[1]}) $*"
 }
@@ -40,7 +39,10 @@ if [ $stage -le 2 ] && [ $stop_stage -ge 2 ]; then
   done
 else
   for subset in small medium large; do
-    ln -s raw/libriheavy_cuts_${subset}.jsonl.gz raw/libriheavy_cuts_${subset}_filter.jsonl.gz
+    if [ ! -e raw/.${subset}_filter.done ]; then
+      rm raw/libriheavy_cuts_${subset}_filter.jsonl.gz
+      ln -s raw/libriheavy_cuts_${subset}.jsonl.gz raw/libriheavy_cuts_${subset}_filter.jsonl.gz
+    fi
   done
 fi
 
