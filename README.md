@@ -12,13 +12,13 @@ bash run.sh --stage -1 --stop-stage -1
 
 The manifests of Libriheavy is hosted in [huggingface](https://huggingface.co/datasets/pkufool/libriheavy) and [modelscope](https://www.modelscope.cn/datasets/pkufool/Libriheavy/summary)(for users in the Chinese mainland). You can download the manifests via:
 
-From huggingface:
+from huggingface:
 
 ```
 bash run.sh --stage 1 --stop-stage 1
 ```
 
-From modelscope:
+or from modelscope:
 ```
 bash run.sh --stage 0 --stop-stage 0
 ```

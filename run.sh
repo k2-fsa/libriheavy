@@ -3,7 +3,7 @@
 set -eou pipefail
 
 stage=1
-stop_stage=5
+stop_stage=2
 
 . ./scripts/parse_options.sh || exit 1
 
@@ -26,6 +26,18 @@ if [ $stage -le -1 ] && [ $stop_stage -ge -1 ]; then
   done
 fi
 
+
+if [ $stage -le 0 ] && [ $stop_stage -ge 0 ]; then
+  log "Stage 1: Downloading manifests from modelscope."
+  if [ ! -e libriheavy_cuts_small.jsonl.gz ]; then
+    GIT_LFS_SKIP_SMUDGE=1 git clone https://www.modelscope.cn/datasets/pkufool/Libriheavy.git
+    cd Libriheavy
+    git lfs pull --exclude "raw/*"
+    mv *.jsonl.gz ../
+    cd ..
+    rm -rf Libriheavy
+  fi
+fi
 
 
 if [ $stage -le 1 ] && [ $stop_stage -ge 1 ]; then
