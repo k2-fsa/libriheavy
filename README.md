@@ -10,7 +10,7 @@ The audio files of Libriheavy is the same as those in Librilight, the audio file
 bash run.sh --stage -1 --stop-stage -1
 ```
 
-The manifests of Libriheavy is hosted in [huggingface](https://huggingface.co/datasets/pkufool/libriheavy) and [modelscope](https://www.modelscope.cn/datasets/pkufool/Libriheavy/summary)(for users in Chinese mainland). You can download the manifests via:
+The manifests of Libriheavy is hosted in [huggingface](https://huggingface.co/datasets/pkufool/libriheavy) and [modelscope](https://www.modelscope.cn/datasets/pkufool/Libriheavy/summary)(for users in the Chinese mainland). You can download the manifests via:
 
 From huggingface:
 
@@ -80,7 +80,7 @@ The manifest downloaded above looks like follows, we have two version of `texts`
 ```
 
 This is the full version of Libriheavy which can be use for various speech tasks.
-You can further extract the manifests for pure ASR model training purpose by:
+You can further extract the manifests for pure ASR training purpose by:
 
 ```
 bash run.sh --stage 2 --stop-stage 2
@@ -187,6 +187,27 @@ Now, you have k2 format(lhotse cuts) and kaldi format corpus for both normalized
 | contributor | toolkit | Libriheavy normalized WER (clean & other) | Libriheavy WER (clean & other) | recipe | model |
 |-------------|---------|-------------------------------------------|--------------------------------|--------|-------|
 | baseline    | icefall |  5.16 & 11.12                             | 13.04 & 19.54                  | [Transducer]()       | [model]()      |
+
+
+## Statistics
+
+You can find the detail description of the corpus in [Librilight paper](https://arxiv.org/pdf/1912.07875.pdf), here are some statistics of Libriheavy.
+The last 7 columns is the distribution of duration (in seconds).
+
+| subset          |  #hours |  #books  | per-spk hrs | total spks | mean | std | min | 25%  | 50%  | 75%  | 99%  |
+|-----------------|---------|----------|-------------|------------|------|-----|-----|------|------|------|------|
+| small           |   509   |   173    |   1.22      |  417       | 14.9 | 6.5 | 2.0 | 10   | 14.4 | 18.6 | 30.8 |
+| medium          |   5042  |   960    |   3.29      |  1531      | 14.8 | 6.4 | 2.0 | 9.9  | 14.3 | 18.5 | 30.8 |
+| large           |   50794 |   8592   |   7.54      |  6736      | 14.8 | 6.4 | 2.0 | 9.8  | 14.2 | 18.4 | 30.7 |
+| dev             |   22.3  |   180    |   0.16      |  141       | 15.0 | 6.5 | 2.1 | 10.1 | 14.5 | 18.6 | 30.8 |
+| test-clean      |   10.5  |   87     |   0.15      |  70        | 14.7 | 6.5 | 2.3 | 9.6  | 14.2 | 18.5 | 30.8 |
+| test-other      |   11.5  |   112    |   0.16      |  72        | 14.6 | 6.4 | 2.2 | 9.7  | 14.0 | 18.2 | 30.6 |
+| test-clean-large|   107.5 |   95     |   1.49      |  72        | 14.8 | 6.4 | 2.0 | 9.9  | 14.3 | 18.4 | 30.8 |
+| test-other-large|   100.3 |   136    |   1.37      |  73        | 14.6 | 6.5 | 2.0 | 9.7  | 14.0 | 18.4 | 30.8 |
+
+## Creation pipeline
+
+You can find the documentation of creation pipeline [here](./pipeline.md).
 
 
 ## Citation
