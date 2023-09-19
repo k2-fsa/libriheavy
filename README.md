@@ -1,6 +1,6 @@
 # Libriheavy: a 50,000 hours ASR corpus with punctuation casing and context
 
-This is the official repository of the Libriheavy dataset. Please refer to our paper: *Libriheavy: a 50,000 hours ASR corpus with punctuation casing and context* for more details. [Preprint available on arxiv](https://arxiv.org/abs/2309.08105).
+This is the official repository of the Libriheavy dataset. Libriheavy is a labeled version of [Librilight](https://arxiv.org/pdf/1912.07875.pdf). Please refer to our paper: *Libriheavy: a 50,000 hours ASR corpus with punctuation casing and context* for more details. [Preprint available on arxiv](https://arxiv.org/abs/2309.08105).
 
 ## How to download the dataset
 
@@ -23,7 +23,7 @@ From modelscope:
 bash run.sh --stage 0 --stop-stage 0
 ```
 
-The manifest downloaded above looks like follows, we have two version of `texts` and `pre_texts`, the first item is the transcript from original book(with casing and punctuation), the second item is the decoding result from a asr model. The second item was used to align the transcript in the original book, we decide to keep it.
+The manifest downloaded above looks like follows, we have two version of `texts` and `pre_texts`, the first item is the transcript from original book (with casing and punctuation), the second item is the decoding result from a asr model. The second item was used to align the transcript in the original book, we decide to keep it.
 
 ```json
 {
@@ -86,7 +86,7 @@ You can further extract the manifests for pure ASR training purpose by:
 bash run.sh --stage 2 --stop-stage 2
 ```
 
-Now, you have k2 format(lhotse cuts) and kaldi format corpus for both normalized version(upper case without punctuation) and full formated version(casing with punctuation):
+Now, you have k2 format (lhotse cuts) and kaldi format corpus for both normalized version (upper case without punctuation) and full formated version (casing with punctuation):
 
 ```
 ├── cases_and_punc
@@ -192,7 +192,7 @@ Now, you have k2 format(lhotse cuts) and kaldi format corpus for both normalized
 ## Statistics
 
 You can find the detail description of the corpus in [Librilight paper](https://arxiv.org/pdf/1912.07875.pdf), here are some statistics of Libriheavy.
-The last 7 columns is the distribution of duration (in seconds).
+The last 7 columns are the distribution of durations (in seconds).
 
 | subset          |  #hours |  #books  | per-spk hrs | total spks | mean | std | min | 25%  | 50%  | 75%  | 99%  |
 |-----------------|---------|----------|-------------|------------|------|-----|-----|------|------|------|------|
