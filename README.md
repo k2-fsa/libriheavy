@@ -149,7 +149,7 @@ Now, you have k2 format (lhotse cuts) and kaldi format corpus for both normalize
 | contributor | toolkit | LibriSpeech WER (clean & other) | Libriheavy WER (clean & other) | recipe | model |
 |-------------|---------|---------------------------------|--------------------------------|--------|-------|
 | baseline    | Wenet   | 2.02 & 5.22                     |  2.74 & 6.68                   | [CTC + Attention]()  | [model]()       |
-| baseline    | icefall | 1.62 & 3.36                     |  2.20 & 5.57                   | [Transducer]()       | [model]()      |
+| baseline    | icefall | 1.62 & 3.36                     |  2.20 & 5.57                   | [Transducer](https://github.com/k2-fsa/icefall/tree/master/egs/libriheavy/ASR/zipformer)       | [model](https://www.modelscope.cn/models/pkufool/icefall-asr-zipformer-libriheavy-20230926/summary)      |
 
 
 #### medium subset
@@ -157,7 +157,7 @@ Now, you have k2 format (lhotse cuts) and kaldi format corpus for both normalize
 | contributor | toolkit | LibriSpeech WER (clean & other) | Libriheavy WER (clean & other) | recipe | model |
 |-------------|---------|---------------------------------|--------------------------------|--------|-------|
 | baseline    | Wenet   | 3.15 & 7.88                     |  3.80 & 8.80                   | [CTC + Attention]()       | [model]()      |
-| baseline    | icefall | 2.35 & 4.82                     |  2.90 & 6.57                   | [Transducer]()       | [model]()      |
+| baseline    | icefall | 2.35 & 4.82                     |  2.90 & 6.57                   | [Transducer](https://github.com/k2-fsa/icefall/tree/master/egs/libriheavy/ASR/zipformer)       | [model](https://www.modelscope.cn/models/pkufool/icefall-asr-zipformer-libriheavy-20230926/summary)      |
 
 
 #### small subset
@@ -165,7 +165,7 @@ Now, you have k2 format (lhotse cuts) and kaldi format corpus for both normalize
 | contributor | toolkit | LibriSpeech WER (clean & other) | Libriheavy WER (clean & other) | recipe | model |
 |-------------|---------|---------------------------------|--------------------------------|--------|-------|
 | baseline    | Wenet   | 5.76 & 15.60                    |  6.94 & 15.17                  | [CTC + Attention]()       | [model]()      |
-| baseline    | icefall | 4.05 & 9.89                     |  4.68 & 10.01                  | [Transducer]()       | [model]()      |
+| baseline    | icefall | 4.05 & 9.89                     |  4.68 & 10.01                  | [Transducer](https://github.com/k2-fsa/icefall/tree/master/egs/libriheavy/ASR/zipformer)       | [model](https://www.modelscope.cn/models/pkufool/icefall-asr-zipformer-libriheavy-20230926/summary)      |
 
 
 ### Models trained on text with casing and punctuation
@@ -174,19 +174,19 @@ Now, you have k2 format (lhotse cuts) and kaldi format corpus for both normalize
 
 | contributor | toolkit | Libriheavy normalized WER (clean & other) | Libriheavy WER (clean & other) | recipe | model |
 |-------------|---------|-------------------------------------------|--------------------------------|--------|-------|
-| baseline    | icefall |  2.28 & 5.68                              |  7.76 & 11.32                  | [Transducer]()       | [model]()       |
+| baseline    | icefall |  2.28 & 5.68                              |  7.76 & 11.32                  | [Transducer](https://github.com/k2-fsa/icefall/tree/master/egs/libriheavy/ASR/zipformer)       | [model](https://www.modelscope.cn/models/pkufool/icefall-asr-zipformer-libriheavy-punc-20230830/summary)       |
 
 #### medium subset
 
 | contributor | toolkit | Libriheavy normalized WER (clean & other) | Libriheavy WER (clean & other) | recipe | model |
 |-------------|---------|-------------------------------------------|--------------------------------|--------|-------|
-| baseline    | icefall |  3.05 & 6.78                              |  9.84 & 13.39                  | [Transducer]()       | [model]()      |
+| baseline    | icefall |  3.05 & 6.78                              |  9.84 & 13.39                  | [Transducer](https://github.com/k2-fsa/icefall/tree/master/egs/libriheavy/ASR/zipformer)       | [model](https://www.modelscope.cn/models/pkufool/icefall-asr-zipformer-libriheavy-punc-20230830/summary)      |
 
 #### small subset
 
 | contributor | toolkit | Libriheavy normalized WER (clean & other) | Libriheavy WER (clean & other) | recipe | model |
 |-------------|---------|-------------------------------------------|--------------------------------|--------|-------|
-| baseline    | icefall |  5.16 & 11.12                             | 13.04 & 19.54                  | [Transducer]()       | [model]()      |
+| baseline    | icefall |  5.16 & 11.12                             | 13.04 & 19.54                  | [Transducer](https://github.com/k2-fsa/icefall/tree/master/egs/libriheavy/ASR/zipformer)       | [model](https://www.modelscope.cn/models/pkufool/icefall-asr-zipformer-libriheavy-punc-20230830/summary)      |
 
 
 ## Statistics
