@@ -2,6 +2,11 @@
 
 This is the official repository of the Libriheavy dataset. Libriheavy is a labeled version of [Librilight](https://arxiv.org/pdf/1912.07875.pdf). Please refer to our paper: *Libriheavy: a 50,000 hours ASR corpus with punctuation casing and context* for more details. [Preprint available on arxiv](https://arxiv.org/abs/2309.08105).
 
+**Updates:**
+
+* we release a version with longer duraitons (from 20 - 100 seconds), see https://huggingface.co/datasets/pkufool/libriheavy_long for details.
+
+
 ## How to download the dataset
 
 The audio files of Libriheavy is the same as those in Librilight, the audio files is available [here](https://github.com/facebookresearch/libri-light/tree/main/data_preparation), you can download it by:
